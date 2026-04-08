@@ -61,6 +61,42 @@ The aim is to connect fact tables and dimension tables correctly, clean the data
   - Revenue by Customer Segment  
 
 ---
+## 📝 Project Summary
 
-## Presentation 
+### 📌 Schema Type
+The project uses a **Star Schema** with **Sales_Fact** as the central fact table.  
+Dimension tables (Customer, Product, Region, Date) connect directly to Sales_Fact.  
+The **Returns_Fact** table is modeled separately, either as a second fact table or a snowflake extension, to handle return transactions.
+
+---
+
+### 🔗 Relationship Rationale & Filter Flow
+- **Sales_Fact → Customer_Dim** (1:Many)  
+- **Sales_Fact → Product_Dim** (1:Many)  
+- **Sales_Fact → Region_Dim** (1:Many)  
+- **Sales_Fact → Date_Dim** (1:Many)  
+- **Returns_Fact → Sales_Fact** (Many:1)  
+- **Returns_Fact → Date_Dim** (inactive relationship for ReturnDateKey)  
+
+Filter flow is set to **single direction** wherever possible to avoid ambiguity.  
+Inactive relationships are activated using DAX when needed.
+
+---
+
+### ⚙️ Issues & Resolutions
+- **Filter Ambiguity** → Resolved by adjusting cross-filter directions.  
+- **Inactive Relationships** → Managed using DAX functions for controlled activation.  
+- **Data Formatting** → Fixed by applying correct data types (currency, whole numbers, dates).  
+- **Hierarchy Sorting** → Built hierarchies (Date, Region, Product) for better drill-down analysis.  
+
+---
+
+### ✅ Verification
+A **Matrix Table** was used to confirm:  
+- Sales grouped by Product Category and Region  
+- Return reasons by Fiscal Year  
+- Revenue by Customer Segment  
+
+---
+
 
