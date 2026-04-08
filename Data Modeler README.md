@@ -1,0 +1,66 @@
+# 📊 Power BI Data Modeling Project
+
+## 🚀 Project Goal
+This project shows how to build a **Star Schema Data Model** in Power BI using Excel files.  
+The aim is to connect fact tables and dimension tables correctly, clean the data, and verify results with a matrix visual.
+
+---
+
+## 📂 Files Used
+- **Customer_Dim.xlsx** → Customer details  
+- **Product_Dim.xlsx** → Product details  
+- **Region_Dim.xlsx** → Country, State, City  
+- **Date_Dim.xlsx** → Calendar and fiscal dates  
+- **Sales_Fact.xlsx** → Sales transactions (main fact table)  
+- **Returns_Fact.xlsx** → Returns linked to sales  
+
+---
+
+## 📝 Step-by-Step Process
+
+### 1. Import Data
+- Open Power BI Desktop.  
+- Use **Power Query** to load all Excel files.  
+- Clean the data: remove blank rows, set correct data types (numbers, dates, text).
+
+### 2. Define Keys
+- Identify **Primary Keys (PK)** in dimension tables (e.g., CustomerID, ProductID).  
+- Identify **Foreign Keys (FK)** in fact tables (e.g., CustomerID in Sales_Fact).
+
+### 3. Create Relationships
+- Connect tables as follows:  
+  - Sales_Fact → Customer_Dim  
+  - Sales_Fact → Product_Dim  
+  - Sales_Fact → Region_Dim  
+  - Sales_Fact → Date_Dim  
+  - Returns_Fact → Sales_Fact  
+  - Returns_Fact → Date_Dim (inactive relationship for ReturnDateKey)
+
+### 4. Build Schema
+- Use **Sales_Fact** as the central hub.  
+- Dimensions (Customer, Product, Region, Date) connect around it → this is the **Star Schema**.  
+- Returns_Fact can be modeled as a second fact table or a snowflake extension.
+
+### 5. Advanced Settings
+- Set relationship cardinalities (1:Many, Many:1).  
+- Use **single filter direction** unless bidirectional is needed.  
+- Handle inactive relationships with DAX when required.
+
+### 6. Enhance Model
+- Format data fields (currency, whole numbers, dates).  
+- Define **Data Categories** (City, Country, ProductName).  
+- Create hierarchies:  
+  - Date: Year → Quarter → Month → Date  
+  - Region: Country → State → City  
+  - Product: Category → Subcategory → ProductName  
+
+### 7. Verify with Matrix Visual
+- Create a **Matrix Table** to check:  
+  - Sales by Product Category and Region  
+  - Return reasons by Fiscal Year  
+  - Revenue by Customer Segment  
+
+---
+
+## Presentation 
+
