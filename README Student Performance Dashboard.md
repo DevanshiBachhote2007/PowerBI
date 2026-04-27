@@ -50,7 +50,8 @@ The following CSV files are required:
 
 ---
 
-## 🧮 DAX Formulas (Copy‑Ready)
+## 🧮 DAX Formulas
+
 
 ### Calculated Columns
 #### DAX
